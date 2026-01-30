@@ -1,4 +1,4 @@
-# 🏷️ Image Label
+# Labelier
 
 A simple, modern web app for quickly labeling images in your local folders, perfect for dataset creation.
 
