@@ -59,7 +59,7 @@ function loadImages(loadAction) {
         });
 }
 
-async function showNextImage() {
+function showNextImage() {
     appService.getNextImage().then((image) => {
         if (image) {
             console.log("Showing next image");
@@ -68,7 +68,7 @@ async function showNextImage() {
     });
 }
 
-async function showPreviousImage() {
+function showPreviousImage() {
     appService.getPreviousImage().then((image) => {
         if (image) {
             console.log("Showing previous image");
