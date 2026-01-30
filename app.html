@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labelier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+</head>
+
+<body class="d-flex flex-column justify-content-between vh-100">
+    <main id="landing">
+        <div class="d-flex flex-md-row-reverse flex-column align-items-center justify-content-center gap-5 p-sm-5 p-3">
+            <div class="col-md-5">
+                <img src="resources/screenshot.jpeg"
+                    alt="Screenshot of the app showing an example image that says 'Society' on it and it's corresponding label in a text input with three buttons below labeled 'Previous image', 'Export labels file' and 'Next image"
+                    class="img-fluid">
+            </div>
+            <div class="col-md-5">
+                <h1 class="display-5 fw-bold text-body-emphasis">Labelier</h1>
+                <h2 class="lead mb-4">A tool that helps you manually label a large amount of images for AI training, by
+                    making the process as efficient as possible, using a simple interface and hotkeys.</h2>
+                <div class="d-flex flex-sm-row flex-column gap-2">
+                    <button type="button" class="btn btn-primary d-none" id="load-saved-button"><i
+                            class="bi bi-folder2-open"></i> Reopen saved directory</button>
+                    <button type="button" class="btn btn-primary" id="load-new-button"><i class="bi bi-folder-plus"></i>
+                        Open
+                        new folder</button>
+                </div>
+            </div>
+        </div>
+        <div class="bg-body-tertiary">
+            <div class="container py-5">
+                <h3 class="border-bottom pb-1">Features</h3>
+                <div class="row mt-3 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 row-cols-1">
+                    <div class="col d-flex align-items-start">
+                        <i class="bi bi-wallet2 me-3 text-body-secondary flex-shrink-0 fs-3"></i>
+                        <div>
+                            <h4 class="fw-bold mb-0 fs-4 text-body-emphasis">Free to use</h4>
+                            <p>Access all features for free, no purchase or subscription neccessary. Forever.</p>
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-start">
+                        <i class="bi bi-pc-display me-3 text-body-secondary flex-shrink-0 fs-3"></i>
+                        <div>
+                            <h4 class="fw-bold mb-0 fs-4 text-body-emphasis">Fully local</h4>
+                            <p>Runs entirely in your browser, without reaching to any external servers. This protects
+                                your data and your privacy.</p>
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-start">
+                        <i class="bi bi-command me-3 text-body-secondary flex-shrink-0 fs-3"></i>
+                        <div>
+                            <h4 class="fw-bold mb-0 fs-4 text-body-emphasis">Hotkeys</h4>
+                            <p>Leverage a predefined set of keyboard shortcuts and other quality of life features.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-start">
+                        <i class="bi bi-file-earmark-arrow-down-fill me-3 text-body-secondary flex-shrink-0 fs-3"></i>
+                        <div>
+                            <h4 class="fw-bold mb-0 fs-4 text-body-emphasis">Export file with labels</h4>
+                            <p>Save a text file with the list of key-value pairs of each image name and it's
+                                corresponding
+                                label.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5 bg-subtle-secondary">
+            <h3 class="border-bottom pb-1">How it works</h3>
+            <ol class="list-unstyled vstack gap-3 fs-">
+                <li class="hstack align-items-start gap-3"><i class="bi bi-1-circle mt-1 fs-5"></i>
+                    <div class="vstack"><strong>Load a directory.</strong> <span>Select a local directory from your
+                            computer and it will automatically load all images inside it.</span></div>
+                </li>
+                <li class="hstack align-items-start gap-3"><i class="bi bi-2-circle mt-1 fs-5"></i>
+                    <div class="vstack"><strong>Label the images.</strong> <span>The images will appear one by one and
+                            in alphabetical order by file name. Just type the label that you want to set for that image
+                            and click save. The tool will automatically advance to the next image. If you make a mistake
+                            or don't want to label the image shown yet, you can use the «previous» and «next»
+                            buttons.</span></div>
+                </li>
+                <li class="hstack align-items-start gap-3"><i class="bi bi-3-circle mt-1 fs-5"></i>
+                    <div class="vstack"><strong>Export the results.</strong> <span>One you've finished labeling all
+                            images, click the export button and you will be prompted to save a text (.txt) file. This
+                            file will contain one row per labeled image with the format
+                            <code>image-name.abc&lt;tab&gt;label&lt;lf&gt;</code>.</span></div>
+                </li>
+            </ol>
+        </div>
+    </main>
+    <section id="viewer" class="container mt-3 d-none">
+        <a class="text-decoration-none mb-3" href=""><i class="bi bi-arrow-left fs-5"></i> Back</a>
+        <div class="progress" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+            id="progress-container">
+            <div class="progress-bar" style="width: 25%" id="progress-bar"></div>
+        </div>
+        <div class="card my-3" style="height: 500px;">
+            <div class="card-header" id="image-name">
+                Image title
+            </div>
+            <div class="card-body position-relative"><img class="position-absolute top-50 start-50 translate-middle"
+                    id="image"></div>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Label" aria-label="Label"
+                aria-describedby="save-button" autocomplete="off" id="label-input">
+            <button class="btn btn-outline-primary" type="button" id="save-label-button">Save</button>
+        </div>
+        <div>
+            <div class="row justify-content-between g-2">
+                <div class="col-6 col-sm-4">
+                    <button type="button" class="btn btn-primary w-100" id="previous-image-button"><i class="bi bi-skip-backward"></i>
+                        Previous image</button>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <button type="button" class="btn btn-outline-success w-100" id="export-button"><i
+                            class="bi bi-file-earmark-arrow-down"></i>
+                        Export labels file</button>
+                </div>
+                <div class="col-6 col-sm-4">
+                    <button type="button" class="btn btn-primary w-100" id="next-image-button">Next image <i
+                            class="bi bi-skip-forward"></i></button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h4>Keyboard shortcuts</h4>
+        <dl class="row mt-3 gy-3">
+            <dt class="col-xxl-2 col-lg-3 col-md-4"><span class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Enter <i class="bi bi-arrow-return-left"></i></span></dt>
+            <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Saves the label and advances to the next image.</dd>
+
+            <dt class="col-xxl-2 col-lg-3 col-md-4"><span class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Alt</span> + <span class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Arrow Right <i class="bi bi-arrow-right"></i></span></dt>
+            <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Skips to the next image without saving the current label.</dd>
+
+            <dt class="col-xxl-2 col-lg-3 col-md-4"><span class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Alt</span> + <span class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Arrow Left <i class="bi bi-arrow-left"></i></span></dt>
+            <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Goes back to the previous image without saving the current label.</dd>
+        </dl>
+    </section>
+    <footer class="bg-body-tertiary mt-5 pt-3 text-body-secondary">
+        <div class="container pt-3">
+            <div class="d-flex flex-column flex-md-row border-bottom justify-content-between">
+                <p class="col-md-5">If you have any issues, questions or suggestions, feel free to <a
+                        href="mailto:adrian@adrianr.dev">reach out</a> so I can improve the app.</p>
+                <p class="col-md-5">If you are using Labelier in your company, consider supporting the app by becoming a
+                    Sponsor on GitHub.</p>
+            </div>
+            <p class="text-center my-3">Made by <a href="https://adrianr.dev">Adrián R</a></p>
+        </div>
+    </footer>
+    <script type="module" src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
