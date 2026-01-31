@@ -29,14 +29,23 @@ const labelInputElement = document.getElementById("label-input");
 
 const landingElement = document.getElementById("landing");
 
+const alertElement = document.getElementById("alert");
+
 /* LANDING FUNCTIONALITY */
-appService.isPreviousWorskpaceAvailable().then((value) => {
-    if (value) {
-        loadNewDirectoryButtonElement.classList.remove("btn-primary");
-        loadNewDirectoryButtonElement.classList.add("btn-outline-primary");
-        loadSavedDirectoryButtonElement.classList.remove("d-none");
-    }
-});
+
+if (navigator.userAgentData.mobile) {
+    loadNewDirectoryButtonElement.classList.add("d-none");
+    loadSavedDirectoryButtonElement.classList.add("d-none");
+    alertElement.hidden = false;
+} else {
+    appService.isPreviousWorskpaceAvailable().then((value) => {
+        if (value) {
+            loadNewDirectoryButtonElement.classList.remove("btn-primary");
+            loadNewDirectoryButtonElement.classList.add("btn-outline-primary");
+            loadSavedDirectoryButtonElement.classList.remove("d-none");
+        }
+    });
+}
 
 /* APP FUNCTINOALITY */
 function loadImages(loadAction) {
@@ -59,7 +68,7 @@ function loadImages(loadAction) {
         });
 }
 
-async function showNextImage() {
+function showNextImage() {
     appService.getNextImage().then((image) => {
         if (image) {
             console.log("Showing next image");
@@ -68,7 +77,7 @@ async function showNextImage() {
     });
 }
 
-async function showPreviousImage() {
+function showPreviousImage() {
     appService.getPreviousImage().then((image) => {
         if (image) {
             console.log("Showing previous image");

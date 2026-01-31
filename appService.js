@@ -132,11 +132,12 @@ export async function getPreviousImage() {
  */
 async function _getCurrentImage() {
     if (currentIndex < 0 || currentIndex > fileHandles.length -1) return;
-    const file = await fileHandles[currentIndex].getFile();
-    return _getAppImageFromFile(file);
+    return fileHandles[currentIndex].getFile().then((file) => {
+        return _getAppImageFromFile(file);
+    });
 }
 
-async function _getAppImageFromFile(file) {
+function _getAppImageFromFile(file) {
     const imageURL = URL.createObjectURL(file);
     return new AppImage(file.name, imageURL);
 }
