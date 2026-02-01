@@ -32,8 +32,8 @@ const landingElement = document.getElementById("landing");
 const alertElement = document.getElementById("alert");
 
 /* LANDING FUNCTIONALITY */
-
-if (navigator.userAgentData.mobile) {
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (isMobile) {
     loadNewDirectoryButtonElement.classList.add("d-none");
     loadSavedDirectoryButtonElement.classList.add("d-none");
     alertElement.hidden = false;
