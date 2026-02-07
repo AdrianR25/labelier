@@ -1,3 +1,7 @@
+---
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.min.css';
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,9 +10,22 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Labelier</title>
+
+		<!-- Open Graph meta tags -->
+		<meta property="og:title" content="Labelier - Effortless Local Image Labeling Tool" />
+		<meta property="og:description" content="Labelier helps you quickly label images for AI training, all in your browser and 100% private. No uploads, no hassle." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://labelier.adrianr.dev/" />
+		<meta property="og:image" content="https://labelier.adrianr.dev/assets/og.png" />
+		<meta property="og:image:alt" content="Screenshot of the Labelier app labeling an image" />
+		<meta property="og:site_name" content="Labelier" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Labelier - Effortless Local Image Labeling Tool" />
+		<meta name="twitter:description" content="Labelier helps you quickly label images for AI training, all in your browser and 100% private." />
+		<meta name="twitter:image" content="https://labelier.adrianr.dev/assets/og.png" />
 	</head>
-	<body>
+	<body class="d-flex flex-column justify-content-between vh-100">
 		<slot />
 	</body>
 </html>

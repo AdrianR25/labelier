@@ -1,11 +1,175 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { Image } from 'astro:assets';
+import screenshotImage from '../assets/screenshot.jpeg';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<Welcome />
+	<main id="landing">
+		<div
+			class="d-flex flex-md-row-reverse flex-column align-items-center justify-content-center gap-5 p-sm-5 p-3"
+		>
+			<div class="col-md-5">
+				<Image src={screenshotImage} alt="Screenshot of the app showing an example image that says 'Society' on it and it's corresponding label in a text input with three buttons below labeled 'Previous image', 'Export labels file' and 'Next image" class="img-fluid"/>
+			</div>
+			<div class="col-md-5">
+				<h1 class="display-5 fw-bold text-body-emphasis">Labelier</h1>
+				<h2 class="lead mb-4">
+					A tool that helps you manually label a large amount of
+					images for AI training, by making the process as efficient
+					as possible, using a simple interface and hotkeys.
+				</h2>
+				<div class="alert alert-danger" role="alert" hidden id="alert">
+					<h4 class="alert-heading">Device not supported</h4>
+					<p>
+						Labelier uses some features that aren't yet supported on
+						your current browser. A solution to this issue is in the
+						works. In the meantime, you can use the tool from a
+						computer.
+					</p>
+					<hr />
+					<p class="mb-0">
+						If you are on a computer and still see this message or
+						if you have any other issues, don't hesitate to <a
+							href="mailto:adrian@adrianr.dev">reach out</a
+						>.
+					</p>
+				</div>
+				<div class="d-flex flex-sm-row flex-column gap-2">
+					<button
+						type="button"
+						class="btn btn-primary d-none"
+						id="load-saved-button"
+						><i class="bi bi-folder2-open"></i> Reopen saved directory</button
+					>
+					<button
+						type="button"
+						class="btn btn-primary"
+						id="load-new-button"
+						><i class="bi bi-folder-plus"></i>
+						Open new folder</button
+					>
+				</div>
+			</div>
+		</div>
+		<div class="bg-body-tertiary">
+			<div class="container py-5">
+				<h3 class="border-bottom pb-1">Features</h3>
+				<div
+					class="row mt-3 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 row-cols-1"
+				>
+					<div class="col d-flex align-items-start">
+						<i
+							class="bi bi-wallet2 me-3 text-body-secondary flex-shrink-0 fs-3"
+						></i>
+						<div>
+							<h4 class="fw-bold mb-0 fs-4 text-body-emphasis">
+								Free to use
+							</h4>
+							<p>
+								Access all features for free, no purchase or
+								subscription neccessary. Forever.
+							</p>
+						</div>
+					</div>
+					<div class="col d-flex align-items-start">
+						<i
+							class="bi bi-pc-display me-3 text-body-secondary flex-shrink-0 fs-3"
+						></i>
+						<div>
+							<h4 class="fw-bold mb-0 fs-4 text-body-emphasis">
+								Fully local
+							</h4>
+							<p>
+								Runs entirely in your browser, without reaching
+								to any external servers. This protects your data
+								and your privacy.
+							</p>
+						</div>
+					</div>
+					<div class="col d-flex align-items-start">
+						<i
+							class="bi bi-command me-3 text-body-secondary flex-shrink-0 fs-3"
+						></i>
+						<div>
+							<h4 class="fw-bold mb-0 fs-4 text-body-emphasis">
+								Hotkeys
+							</h4>
+							<p>
+								Leverage a predefined set of keyboard shortcuts
+								and other quality of life features.
+							</p>
+						</div>
+					</div>
+					<div class="col d-flex align-items-start">
+						<i
+							class="bi bi-file-earmark-arrow-down-fill me-3 text-body-secondary flex-shrink-0 fs-3"
+						></i>
+						<div>
+							<h4 class="fw-bold mb-0 fs-4 text-body-emphasis">
+								Export file with labels
+							</h4>
+							<p>
+								Save a text file with the list of key-value
+								pairs of each image name and it's corresponding
+								label.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container mt-5 bg-subtle-secondary">
+			<h3 class="border-bottom pb-1">How it works</h3>
+			<ol class="list-unstyled vstack gap-3 fs-">
+				<li class="hstack align-items-start gap-3">
+					<i class="bi bi-1-circle mt-1 fs-5"></i>
+					<div class="vstack">
+						<strong>Load a directory.</strong>
+						<span
+							>Select a local directory from your computer and it
+							will automatically load all images inside it.</span>
+					</div>
+				</li>
+				<li class="hstack align-items-start gap-3">
+					<i class="bi bi-2-circle mt-1 fs-5"></i>
+					<div class="vstack">
+						<strong>Label the images.</strong>
+						<span
+							>The images will appear one by one and in
+							alphabetical order by file name. Just type the label
+							that you want to set for that image and click save.
+							The tool will automatically advance to the next
+							image. If you make a mistake or don't want to label
+							the image shown yet, you can use the «previous» and
+							«next» buttons.</span>
+					</div>
+				</li>
+				<li class="hstack align-items-start gap-3">
+					<i class="bi bi-3-circle mt-1 fs-5"></i>
+					<div class="vstack">
+						<strong>Export the results.</strong>
+						<span
+							>One you've finished labeling all images, click the
+							export button and you will be prompted to save a
+							text (.txt) file. This file will contain one row per
+							labeled image with the format
+							<code>image-name.abc&lt;tab&gt;label&lt;lf&gt;</code
+							>.</span>
+					</div>
+				</li>
+			</ol>
+		</div>
+	</main>
+	<footer class="bg-body-tertiary mt-5 pt-3 text-body-secondary">
+        <div class="container pt-3">
+            <div class="d-flex flex-column flex-md-row border-bottom justify-content-between">
+                <p class="col-md-5">If you have any issues, questions or suggestions, feel free to <a
+                        href="mailto:adrian@adrianr.dev">reach out</a> so I can improve the app.</p>
+                <p class="col-md-5">If you are using Labelier in your company, consider supporting the app by becoming a
+                    Sponsor on GitHub.</p>
+            </div>
+            <p class="text-center my-3">Made by <a href="https://adrianr.dev">Adrián R</a></p>
+        </div>
+    </footer>
 </Layout>
