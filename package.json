@@ -1,0 +1,12 @@
+{
+  "name": "labelier",
+  "version": "2.0.0",
+  "private": true,
+  "workspaces": ["landing", "app"],
+  "scripts": {
+    "build:angular": "cd app && ng build",
+    "copy:angular": "npx shx cp -R ./app/dist/labelier/browser ./landing/public/app",
+    "build:astro": "cd landing && npm run build",
+    "build": "npm run build:angular && npm run copy:angular && npm run build:astro"
+  }
+}
