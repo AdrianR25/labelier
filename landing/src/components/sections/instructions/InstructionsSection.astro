@@ -1,0 +1,28 @@
+---
+import Instruction from "./Instruction.astro";
+---
+
+<div class="container mt-5 bg-subtle-secondary">
+    <h3 class="border-bottom pb-1">How it works</h3>
+    <ol class="list-unstyled vstack gap-3 fs-">
+        <Instruction number="1" , title="Load a directory.">
+            <span>Select a local directory from your computer and it will
+                automatically load all images inside it.</span>
+        </Instruction>
+        <Instruction number="2" , title="Label the images.">
+            <span>The images will appear one by one and in alphabetical order
+                    by file name. Just type the label that you want to set for
+                    that image and click save. The tool will automatically
+                    advance to the next image. If you make a mistake or don't
+                    want to label the image shown yet, you can use the
+                    «previous» and «next» buttons.</span>
+        </Instruction>
+        <Instruction number="3" , title="Export the results.">
+            <span>One you've finished labeling all images, click the export
+                    button and you will be prompted to save a text (.txt) file.
+                    This file will contain one row per labeled image with the
+                    format
+                    <code>image-name.abc&lt;tab&gt;label&lt;lf&gt;</code>.</span>
+        </Instruction>
+    </ol>
+</div>
