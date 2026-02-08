@@ -17,4 +17,10 @@ export class Home {
       this.router.navigate(['/editor']);
     });
   }
+
+  loadExistingDirectory() {
+    this.labelingService.loadPreviousDirectory().then(() => {
+      this.router.navigate(['/editor']);
+    })
+  }
 }

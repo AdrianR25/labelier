@@ -14,8 +14,8 @@
     </div>
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Label" aria-label="Label" aria-describedby="save-button"
-            autocomplete="off" id="label-input">
-        <button class="btn btn-outline-primary" type="button" id="save-label-button">Save</button>
+            autocomplete="off" id="label-input" [formControl]="label">
+        <button class="btn btn-outline-primary" type="button" id="save-label-button" (click)="saveLabel()">Save</button>
     </div>
     <div>
         <div class="row justify-content-between g-2">

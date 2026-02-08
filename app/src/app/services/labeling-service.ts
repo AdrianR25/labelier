@@ -10,7 +10,7 @@ import { ImageLabelDTO } from '../model/image-label-dto';
 export class LabelingService {
   private storageService = inject(StorageService);
 
-  private files: File[] = [];
+  private imageLabels: ImageLabelDTO[] = [];
   private currentIndex = -1;
 
 
@@ -21,8 +21,25 @@ export class LabelingService {
    * @returns A promise that resolves to `true` if files are present, otherwise `false`.
    */
   public async isPreviousWorkspaceAvailable(): Promise<boolean> {
-    const files = await this.storageService.getFiles();
+    const files = await this.storageService.getImageLabels();
     return !!files;
+  }
+
+  /**
+   * Loads the previously used directory's image labels and index from storage if available.
+   * 
+   * This method checks if a previous workspace is available. If so, it retrieves the image labels
+   * and the current index from the storage service and updates the corresponding properties.
+   * If no previous workspace is available, the method returns without making any changes.
+   *
+   * @returns A promise that resolves when the previous directory data has been loaded.
+   */
+  public async loadPreviousDirectory(): Promise<void> {
+    const isPreviousAvailable = await this.isPreviousWorkspaceAvailable();
+    if (!isPreviousAvailable) return;
+
+    this.imageLabels = await this.storageService.getImageLabels();
+    this.currentIndex = await this.storageService.getIndex();
   }
 
   /**
@@ -35,11 +52,16 @@ export class LabelingService {
   public async loadNewDirectory(): Promise<void> {
     const files = (await directoryOpen()).filter((file) => this.isFileImage(file));
 
-    files.sort((a, b) => a.name.localeCompare(b.name));
-
     if (files && files.length > 0) {
-      this.files = files;
-      await this.storageService.saveFiles(files);
+      files.sort((a, b) => a.name.localeCompare(b.name));
+      const imageLabelDTOs: ImageLabelDTO[] = files.map((file) => {
+        return {
+          image: file,
+          label: ""
+        };
+      });
+      this.imageLabels = imageLabelDTOs;
+      await this.storageService.saveImageLabels(this.imageLabels);
     }
   }
 
@@ -68,42 +90,38 @@ export class LabelingService {
   private updateEditorState() {
     this._editorState.set({
       currentIndex: this.currentIndex,
-      isNextImage: this.currentIndex + 1 !== this.files.length,
+      isNextImage: this.currentIndex + 1 !== this.imageLabels.length,
       isPreviousImage: this.currentIndex - 1 >= 0,
-      totalImagesAmount: this.files.length,
-      completionPercentage: (this.currentIndex + 1) / this.files.length * 100,
+      totalImagesAmount: this.imageLabels.length,
+      completionPercentage: (this.currentIndex + 1) / this.imageLabels.length * 100,
     });
   }
 
   public get nextImage(): ImageLabelDTO | undefined {
-    console.log("before next image", this.currentIndex);
-    console.log("files", this.files);
+    if (this.currentIndex + 1 === this.imageLabels.length) return;
 
-    if (this.currentIndex + 1 === this.files.length) return;
-    const nextIndex = ++this.currentIndex;
-    console.log("after next image", this.currentIndex);
-    console.log(nextIndex, this.files[nextIndex]);
+    const newIndex = ++this.currentIndex;
+    this.storageService.saveIndex(newIndex);
+
     this.updateEditorState();
-    return this.buildImageLabelDTOFromFile(this.files[nextIndex]);
+
+    return this.imageLabels[newIndex];
   }
 
   public get previousImage(): ImageLabelDTO | undefined {
-    console.log("before previous image", this.currentIndex);
     if (this.currentIndex - 1 < 0) return;
-    const nextIndex = --this.currentIndex;
-    console.log("after previous image", this.currentIndex);
-    console.log(nextIndex, this.files[nextIndex]);
+
+    const newIndex = --this.currentIndex;
+    this.storageService.saveIndex(newIndex);
+
     this.updateEditorState();
-    return this.buildImageLabelDTOFromFile(this.files[nextIndex]);
+
+    return this.imageLabels[newIndex];
   }
 
-  private buildImageLabelDTOFromFile(file: File) {
-    const editorImage: ImageLabelDTO = {
-      image: file,
-      label: ""
-    }
-    return editorImage;
+  public async labelCurrentImage(label: string) {
+    this.imageLabels[this.currentIndex].label = label;
+    await this.storageService.saveImageLabels(this.imageLabels);
   }
-
 
 }

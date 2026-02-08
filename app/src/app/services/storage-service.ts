@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import { get, set } from 'idb-keyval';
+import { ImageLabelDTO } from '../model/image-label-dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  async isFiles() {
-    const files = await get('files');
+  async existsImageLabels() {
+    const files = await get('imageLabels');
     return !!files;
   }
 
-  getFiles() {
-    return get("files");
+  getImageLabels() {
+    return get("imageLabels");
   }
 
-  saveFiles(files: File[]) {
-    return set("files", files);
+  saveImageLabels(files: ImageLabelDTO[]) {
+    return set("imageLabels", files);
+  }
+
+  getIndex() {
+    return get("index");
+  }
+
+  saveIndex(index: number) {
+    return set("index", index);
   }
 }
