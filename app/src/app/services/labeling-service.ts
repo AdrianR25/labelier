@@ -38,8 +38,8 @@ export class LabelingService {
     const isPreviousAvailable = await this.isPreviousWorkspaceAvailable();
     if (!isPreviousAvailable) return;
 
-    this.imageLabels = await this.storageService.getImageLabels();
-    this.currentIndex = await this.storageService.getIndex() - 1;
+    this.imageLabels = await this.storageService.getImageLabels() || [];
+    this.currentIndex = await this.storageService.getIndex() || 0 - 1;
   }
 
   /**

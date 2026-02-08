@@ -11,7 +11,7 @@ export class StorageService {
     return !!files;
   }
 
-  getImageLabels() {
+  getImageLabels(): Promise<ImageLabelDTO[] | undefined> {
     return get("imageLabels");
   }
 
@@ -19,7 +19,7 @@ export class StorageService {
     return set("imageLabels", files);
   }
 
-  getIndex() {
+  getIndex(): Promise<number | undefined> {
     return get("index");
   }
 

@@ -4,6 +4,7 @@ import { LabelingService } from '../../services/labeling-service';
 import { EditorState } from '../../model/editor-state';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ImageLabelDTO } from '../../model/image-label-dto';
+import { ExportService } from '../../services/export-service';
 
 @Component({
   selector: 'app-editor',
@@ -14,6 +15,7 @@ import { ImageLabelDTO } from '../../model/image-label-dto';
 export class Editor {
 
   private labelingService = inject(LabelingService);
+  private exportService = inject(ExportService);
 
   protected imageUrl?: string;
   protected imageName?: string;
@@ -42,6 +44,10 @@ export class Editor {
     this.labelingService.labelCurrentImage(this.label.value || "");
     this.label.setValue("");
     this.showNextImage();
+  }
+
+  protected exportImageLabels() {
+    this.exportService.exportImageLabels();
   }
 
   ngOnInit() {
