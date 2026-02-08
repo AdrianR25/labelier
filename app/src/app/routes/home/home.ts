@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { LabelingService } from '../../services/labeling-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,12 @@ import { LabelingService } from '../../services/labeling-service';
   styleUrl: './home.css',
 })
 export class Home {
-  labelingService = inject(LabelingService);
+  private labelingService = inject(LabelingService);
+  private router = inject(Router);
 
   loadNewDirectory() {
     this.labelingService.loadNewDirectory().then(() => {
-      // TODO: Navigate to editor
+      this.router.navigate(['/editor']);
     });
   }
 }
