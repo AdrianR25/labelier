@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { directoryOpen } from 'browser-fs-access';
 import { StorageService } from './storage-service';
 import { EditorState } from '../model/editor-state';
@@ -11,9 +11,7 @@ export class LabelingService {
   private storageService = inject(StorageService);
 
   private files: File[] = [];
-  private _editorState: EditorState = {
-    currentIndex: -1
-  };
+  private currentIndex = -1;
 
 
   /**
@@ -55,30 +53,47 @@ export class LabelingService {
     return permittedExtensions.includes(extension);
   }
 
+  private _editorState: WritableSignal<EditorState> = signal({
+    currentIndex: this.currentIndex,
+    isNextImage: false,
+    isPreviousImage: false,
+    completionPercentage: 0,
+    totalImagesAmount: 0,
+  });
 
-  public get editorState(): EditorState {
-    return this._editorState;
+  public get editorState(): Signal<EditorState> {
+    return this._editorState.asReadonly();
+  }
+
+  private updateEditorState() {
+    this._editorState.set({
+      currentIndex: this.currentIndex,
+      isNextImage: this.currentIndex + 1 !== this.files.length,
+      isPreviousImage: this.currentIndex - 1 >= 0,
+      totalImagesAmount: this.files.length,
+      completionPercentage: (this.currentIndex + 1) / this.files.length * 100,
+    });
   }
 
   public get nextImage(): ImageLabelDTO | undefined {
-    console.log("before next image", this._editorState.currentIndex);
+    console.log("before next image", this.currentIndex);
     console.log("files", this.files);
-    
-    if (this._editorState.currentIndex + 1 === this.files.length) return;
-    const nextIndex = ++this._editorState.currentIndex;
-    console.log("after next image", this._editorState.currentIndex);
-    console.log(nextIndex, this.files[nextIndex]);
 
+    if (this.currentIndex + 1 === this.files.length) return;
+    const nextIndex = ++this.currentIndex;
+    console.log("after next image", this.currentIndex);
+    console.log(nextIndex, this.files[nextIndex]);
+    this.updateEditorState();
     return this.buildImageLabelDTOFromFile(this.files[nextIndex]);
   }
 
   public get previousImage(): ImageLabelDTO | undefined {
-    console.log("before previous image", this._editorState.currentIndex);
-    if (this._editorState.currentIndex - 1 < 0) return;
-    const nextIndex = --this._editorState.currentIndex;
-    console.log("after previous image", this._editorState.currentIndex);
+    console.log("before previous image", this.currentIndex);
+    if (this.currentIndex - 1 < 0) return;
+    const nextIndex = --this.currentIndex;
+    console.log("after previous image", this.currentIndex);
     console.log(nextIndex, this.files[nextIndex]);
-    
+    this.updateEditorState();
     return this.buildImageLabelDTOFromFile(this.files[nextIndex]);
   }
 
