@@ -39,7 +39,7 @@ export class LabelingService {
     if (!isPreviousAvailable) return;
 
     this.imageLabels = await this.storageService.getImageLabels();
-    this.currentIndex = await this.storageService.getIndex();
+    this.currentIndex = await this.storageService.getIndex() - 1;
   }
 
   /**
