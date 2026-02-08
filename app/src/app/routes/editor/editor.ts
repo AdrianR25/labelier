@@ -1,4 +1,4 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, ElementRef, inject, Signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { LabelingService } from '../../services/labeling-service';
 import { EditorState } from '../../model/editor-state';
@@ -16,12 +16,14 @@ export class Editor {
 
   private labelingService = inject(LabelingService);
   private exportService = inject(ExportService);
+  private elementRef = inject(ElementRef);
 
   protected imageUrl?: string;
   protected imageName?: string;
   protected editorState?: Signal<EditorState>;
 
   protected label = new FormControl('');
+  private inputLabelElement?: HTMLElement;
 
   protected showNextImage() {
     const imageLabel = this.labelingService.nextImage;
@@ -38,6 +40,7 @@ export class Editor {
     this.imageUrl = URL.createObjectURL(imageLabel.image);
     this.imageName = imageLabel.image.name;
     this.label.setValue(imageLabel.label);
+    this.inputLabelElement?.focus();
   }
 
   protected saveLabel() {
@@ -51,8 +54,9 @@ export class Editor {
   }
 
   ngOnInit() {
-    this.showNextImage();
+    this.inputLabelElement = this.elementRef.nativeElement.querySelector('#label-input');
     this.editorState = this.labelingService.editorState;
+    this.showNextImage();
   }
 
 }
