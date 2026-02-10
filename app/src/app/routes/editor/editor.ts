@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Signal } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, Signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { LabelingService } from '../../services/labeling-service';
 import { EditorState } from '../../model/editor-state';
@@ -11,6 +11,11 @@ import { ExportService } from '../../services/export-service';
   imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './editor.html',
   styleUrl: './editor.css',
+  host: {
+    '(document:keydown.enter)': 'onEnter($event)',
+    '(document:keydown.alt.arrowright)': 'onAltArrowRight($event)',
+    '(document:keydown.alt.arrowleft)': 'onAltArrowLeft($event)',
+  }
 })
 export class Editor {
 
@@ -51,6 +56,23 @@ export class Editor {
 
   protected exportImageLabels() {
     this.exportService.exportImageLabels();
+  }
+
+  onEnter(event: Event) {
+    event.preventDefault();
+    const ke = event as KeyboardEvent;
+    if (ke.repeat) return;
+    this.saveLabel();    
+  }
+
+  onAltArrowRight(event: Event) {
+    event.preventDefault();
+    this.showNextImage();
+  }
+
+  onAltArrowLeft(event: Event) {
+    event.preventDefault();
+    this.showPreviousImage();
   }
 
   ngOnInit() {
