@@ -3,6 +3,7 @@ import { LabelingService } from '../../services/labeling-service';
 import { Router } from '@angular/router';
 import { CompatibilityService } from '../../services/compatibility-service';
 import { NgClass } from '@angular/common';
+import { supported } from 'browser-fs-access';
 
 @Component({
   selector: 'app-home',
@@ -39,6 +40,7 @@ export class Home {
   }
 
   ngOnInit() {
+    console.log(supported);    
     this.labelingService.isPreviousWorkspaceAvailable().then(isAvailable => this.isPreviousWorkspaceAvailable.set(isAvailable));
     this.compatibilityService.isOldWorkspaceAvailable().then(isAvailable => this.isOldWorkspaceAvailable.set(isAvailable));
   }
