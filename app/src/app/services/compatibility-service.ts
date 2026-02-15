@@ -4,6 +4,7 @@ import { directoryOpen, FileSystemHandle } from 'browser-fs-access';
 import { LabelingService } from './labeling-service';
 import { ImageLabelDTO } from '../model/image-label-dto';
 import { OldImageLabelDTO } from '../model/old-image-label-dto';
+import { clear, set } from 'idb-keyval';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,9 @@ export class CompatibilityService {
   private labelingService = inject(LabelingService);
 
   public async isOldWorkspaceAvailable(): Promise<boolean> {
-    return this.storageService.existsOldDirectory();
+    const dataMigrated = localStorage.getItem("dataMigrated");
+    const existsOldDirectory = await this.storageService.existsOldDirectory();
+    return !dataMigrated && existsOldDirectory;
   }
 
   public async migrateOldWorkspace() {
@@ -34,18 +37,20 @@ export class CompatibilityService {
     const files = (await directoryOpen(options)).filter((file) => this.labelingService.isFileImage(file));
 
     /* Sort files and convert to new interface */
-    if (files && files.length > 0) {
-      files.sort((a, b) => a.name.localeCompare(b.name));
+    if (!files || files.length <= 0) throw new Error("User didn't select a valid directory");    
 
-      const imageLabelDTOs: ImageLabelDTO[] = files.map((file) => {
-        return {
-          image: file,
-          label: this.getOldImageLabel(oldImageLabels, file.name),
-        };
-      });
-      
-      await this.storageService.saveImageLabels(imageLabelDTOs);
-    }
+    files.sort((a, b) => a.name.localeCompare(b.name));
+
+    const imageLabelDTOs: ImageLabelDTO[] = files.map((file) => {
+      return {
+        image: file,
+        label: this.getOldImageLabel(oldImageLabels, file.name),
+      };
+    });
+    
+    await this.storageService.saveImageLabels(imageLabelDTOs);
+
+    localStorage.setItem("dataMigrated", "true");
 
   }
 
