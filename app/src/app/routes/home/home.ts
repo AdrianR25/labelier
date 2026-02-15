@@ -29,12 +29,6 @@ export class Home {
     });
   }
 
-  protected testLoadOldData() {
-    this.compatibilityService.testLoad().then((value) => {
-      this.compatibilityService.isOldWorkspaceAvailable().then(isAvailable => this.isOldWorkspaceAvailable.set(isAvailable));
-    });
-  }
-
   protected migrateAndOpenOldWorkspace() {
     this.loading.set(true);
     this.compatibilityService.migrateOldWorkspace().then(() => {
