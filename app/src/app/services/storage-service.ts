@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { get, set } from 'idb-keyval';
 import { ImageLabelDTO } from '../model/image-label-dto';
+import { OldImageLabelDTO } from '../model/old-image-label-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +26,18 @@ export class StorageService {
 
   saveIndex(index: number) {
     return set("index", index);
+  }
+
+  async existsOldDirectory(): Promise<boolean> {
+    const directoryHandle = await get("directory");    
+    return !!directoryHandle;
+  }
+
+  getOldDirectoryHandle(): Promise<FileSystemHandle | undefined> {
+    return get("directory");
+  }
+
+  getOldImageLabels(): Promise<OldImageLabelDTO[] | undefined> {
+    return get("labels");
   }
 }

@@ -21,8 +21,7 @@ export class LabelingService {
    * @returns A promise that resolves to `true` if files are present, otherwise `false`.
    */
   public async isPreviousWorkspaceAvailable(): Promise<boolean> {
-    const files = await this.storageService.getImageLabels();
-    return !!files;
+    return await this.storageService.existsImageLabels();
   }
 
   /**
@@ -65,7 +64,7 @@ export class LabelingService {
     }
   }
 
-  private isFileImage(file: File): boolean {
+  public isFileImage(file: File): boolean {
     if (!file || !file.name) return false;
 
     const extension = file.name.split(".").pop();
