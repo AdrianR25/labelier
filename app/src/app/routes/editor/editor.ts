@@ -1,14 +1,16 @@
-import { Component, ElementRef, HostListener, inject, Signal } from '@angular/core';
+import { Component, ElementRef, inject, Signal } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { LabelingService } from '../../services/labeling-service';
 import { EditorState } from '../../model/editor-state';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ImageLabelDTO } from '../../model/image-label-dto';
 import { ExportService } from '../../services/export-service';
+import { DecimalPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-editor',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, DecimalPipe],
   templateUrl: './editor.html',
   styleUrl: './editor.css',
   host: {

@@ -3,7 +3,7 @@
     <div class="progress" role="progressbar" [ariaValueNow]="editorState!().currentIndex" aria-valuemin="0"
         [ariaValueMax]="editorState!().totalImagesAmount" id="progress-container">
         <div class="progress-bar" [style.width.%]="editorState!().completionPercentage" id="progress-bar">{{
-            editorState!().completionPercentage }}%</div>
+            editorState!().completionPercentage | number: '1.0-0' }}%</div>
     </div>
     <div class="card my-3" style="height: 500px;">
         <div class="card-header" id="image-name">
@@ -19,18 +19,18 @@
     </div>
     <div>
         <div class="row justify-content-between g-2">
-            <div class="col-6 col-sm-4">
+            <div class="col-6 col-sm-auto">
                 <button type="button" class="btn btn-primary w-100" id="previous-image-button"
                     (click)="showPreviousImage()" [disabled]="!editorState!().isPreviousImage"><i
                         class="bi bi-skip-backward"></i>
                     Previous image</button>
             </div>
-            <div class="col-12 col-sm-4">
+            <div class="col-12 col-sm-auto order-1 order-sm-0">
                 <button type="button" class="btn btn-outline-success w-100" id="export-button" (click)="exportImageLabels()"><i
                         class="bi bi-file-earmark-arrow-down"></i>
                     Export labels file</button>
             </div>
-            <div class="col-6 col-sm-4">
+            <div class="col-6 col-sm-auto">
                 <button type="button" class="btn btn-primary w-100" id="next-image-button" (click)="showNextImage()"
                     [disabled]="!editorState!().isNextImage">Next image <i class="bi bi-skip-forward"></i></button>
             </div>
