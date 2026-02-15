@@ -2,10 +2,11 @@ import { Component, inject, signal, Signal, WritableSignal } from '@angular/core
 import { LabelingService } from '../../services/labeling-service';
 import { Router } from '@angular/router';
 import { CompatibilityService } from '../../services/compatibility-service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -15,6 +16,7 @@ export class Home {
   private compatibilityService = inject(CompatibilityService);
 
   protected isOldWorkspaceAvailable: WritableSignal<boolean | undefined> = signal(undefined);
+  protected isPreviousWorkspaceAvailable: WritableSignal<boolean | undefined> = signal(undefined);
   protected loading: WritableSignal<boolean> = signal(false);
 
   protected loadNewDirectory() {
@@ -37,6 +39,7 @@ export class Home {
   }
 
   ngOnInit() {
+    this.labelingService.isPreviousWorkspaceAvailable().then(isAvailable => this.isPreviousWorkspaceAvailable.set(isAvailable));
     this.compatibilityService.isOldWorkspaceAvailable().then(isAvailable => this.isOldWorkspaceAvailable.set(isAvailable));
   }
 }

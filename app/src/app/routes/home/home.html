@@ -19,8 +19,10 @@
     </div>
     } @else {
     <div class="hstack justify-content-center gap-3 mt-2">
+        @if (isPreviousWorkspaceAvailable()) {
         <button type="button" class="btn btn-primary" (click)="loadExistingDirectory()">Reopen saved folder</button>
-        <button type="button" class="btn btn-outline-primary" (click)="loadNewDirectory()">Open new folder</button>
+        }
+        <button type="button" class="btn" [ngClass]="isPreviousWorkspaceAvailable() === true ? 'btn-outline-primary' : 'btn-primary'" (click)="loadNewDirectory()">Open new folder</button>
     </div>
     }
 </main>
