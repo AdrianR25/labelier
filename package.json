@@ -7,6 +7,7 @@
     "build:angular": "cd app && ng build --deploy-url /app/ --base-href /app/",
     "copy:angular": "npx shx cp -R ./app/dist/labelier/browser ./landing/public/app",
     "build:astro": "cd landing && npm run build",
-    "build": "npm run build:angular && npm run copy:angular && npm run build:astro"
+    "build": "npm run build:angular && npm run copy:angular && npm run build:astro",
+    "preview": "cd landing && npm run preview"
   }
 }
