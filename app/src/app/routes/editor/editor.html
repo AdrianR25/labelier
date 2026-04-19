@@ -1,61 +1,60 @@
-<section class="container mt-3">
+<section class="container pt-3 vh-100 d-flex flex-column">
     <a class="text-decoration-none mb-3" routerLink=""><i class="bi bi-arrow-left fs-5"></i> Back</a>
     <div class="progress" role="progressbar" [ariaValueNow]="editorState!().currentIndex" aria-valuemin="0"
-        [ariaValueMax]="editorState!().totalImagesAmount">
+        [ariaValueMax]="editorState!().totalImagesAmount" style="height: 25px;">
         <div class="progress-bar" [style.width.%]="editorState!().completionPercentage">{{
             editorState!().completionPercentage | number: '1.0-0' }}%</div>
     </div>
-    <div class="card my-3" style="height: 500px;">
+    <div class="card h-100 my-3">
         <div class="card-header">
             {{imageName}}
         </div>
-        <div class="card-body position-relative"><img class="position-absolute top-50 start-50 translate-middle"
-                [src]="imageUrl"></div>
-    </div>
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Label" aria-label="Label" aria-describedby="save-button"
-            autocomplete="off" id="label-input" [formControl]="label">
-        <button class="btn btn-outline-primary" type="button" (click)="saveLabel()">Save</button>
-    </div>
-    <div>
-        <div class="row justify-content-between g-2">
-            <div class="col-6 col-sm-auto">
-                <button type="button" class="btn btn-primary w-100"
-                    (click)="showPreviousImage()" [disabled]="!editorState!().isPreviousImage"><i
-                        class="bi bi-skip-backward"></i>
-                    Previous image</button>
-            </div>
-            <div class="col-12 col-sm-auto order-1 order-sm-0">
-                <button type="button" class="btn btn-outline-success w-100" (click)="exportImageLabels()"><i
-                        class="bi bi-file-earmark-arrow-down"></i>
-                    Export labels file</button>
-            </div>
-            <div class="col-6 col-sm-auto">
-                <button type="button" class="btn btn-primary w-100" (click)="showNextImage()"
-                    [disabled]="!editorState!().isNextImage">Next image <i class="bi bi-skip-forward"></i></button>
-            </div>
+        <div class="card-body position-relative overflow-hidden">
+            <img class="position-absolute top-50 start-50 translate-middle mh-100 mw-100 w-auto" [src]="imageUrl">
         </div>
     </div>
-    <hr>
-    <h4>Keyboard shortcuts</h4>
-    <dl class="row mt-3 gy-3">
-        <dt class="col-xxl-2 col-lg-3 col-md-4"><span
-                class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Enter <i
-                    class="bi bi-arrow-return-left"></i></span></dt>
-        <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Saves the label and advances to the next image.</dd>
-
-        <dt class="col-xxl-2 col-lg-3 col-md-4"><span
-                class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Alt</span> + <span
-                class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Arrow Right <i
-                    class="bi bi-arrow-right"></i></span></dt>
-        <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Skips to the next image without saving the current label.
-        </dd>
-
-        <dt class="col-xxl-2 col-lg-3 col-md-4"><span
-                class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Alt</span> + <span
-                class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Arrow Left <i
-                    class="bi bi-arrow-left"></i></span></dt>
-        <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Goes back to the previous image without saving the current
-            label.</dd>
-    </dl>
+    <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Label" aria-label="Label" aria-describedby="save-button"
+                autocomplete="off" id="label-input" [formControl]="label">
+            <button class="btn btn-outline-primary" type="button" (click)="saveLabel()">Save</button>
+        </div>
+        <div>
+            <div class="row justify-content-between g-2">
+                <div class="col-6 col-sm-auto">
+                    <button type="button" class="btn btn-primary w-100"
+                        (click)="showPreviousImage()" [disabled]="!editorState!().isPreviousImage"><i
+                            class="bi bi-skip-backward"></i>
+                        Previous image</button>
+                </div>
+                <div class="col-12 col-sm-auto order-1 order-sm-0">
+                    <button type="button" class="btn btn-outline-success w-100" (click)="exportImageLabels()"><i
+                            class="bi bi-file-earmark-arrow-down"></i>
+                        Export labels file</button>
+                </div>
+                <div class="col-6 col-sm-auto">
+                    <button type="button" class="btn btn-primary w-100" (click)="showNextImage()"
+                        [disabled]="!editorState!().isNextImage">Next image <i class="bi bi-skip-forward"></i></button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h4>Keyboard shortcuts</h4>
+        <dl class="row mt-3 gy-3">
+            <dt class="col-xxl-2 col-lg-3 col-md-4"><span
+                    class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Enter <i
+                        class="bi bi-arrow-return-left"></i></span></dt>
+            <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Saves the label and advances to the next image.</dd>
+            <dt class="col-xxl-2 col-lg-3 col-md-4"><span
+                    class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Alt</span> + <span
+                    class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Arrow Right <i
+                        class="bi bi-arrow-right"></i></span></dt>
+            <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Skips to the next image without saving the current label.
+            </dd>
+            <dt class="col-xxl-2 col-lg-3 col-md-4"><span
+                    class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Alt</span> + <span
+                    class="border px-2 py-1 rounded-1 border-secondary shadow-sm fw-medium">Arrow Left <i
+                        class="bi bi-arrow-left"></i></span></dt>
+            <dd class="col-xxl-10 col-lg-9 col-md-8 mt-2 mt-md-3">Goes back to the previous image without saving the current
+                label.</dd>
+        </dl>
 </section>
