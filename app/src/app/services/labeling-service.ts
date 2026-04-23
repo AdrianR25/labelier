@@ -61,6 +61,7 @@ export class LabelingService {
       });
       this.imageLabels = imageLabelDTOs;
       await this.storageService.saveImageLabels(this.imageLabels);
+      await this.storageService.saveIndex(0);
     }
   }
 
