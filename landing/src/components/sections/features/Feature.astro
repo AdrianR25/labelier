@@ -1,0 +1,18 @@
+---
+const { iconClass, title, description } = Astro.props;
+---
+
+<div class="col d-flex align-items-start">
+    <i
+        class:list={[
+            "bi me-3 text-body-secondary flex-shrink-0 fs-3",
+            iconClass,
+        ]}
+        class=""></i>
+    <div>
+        <h4 class="fw-bold mb-0 fs-4 text-body-emphasis">{title}</h4>
+        <p>
+            {description}
+        </p>
+    </div>
+</div>

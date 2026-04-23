@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import screenshotImage from "../../assets/screenshot.jpeg";
+---
+
+<div
+    class="d-flex flex-md-row-reverse flex-column align-items-center justify-content-center gap-5 p-sm-5 p-3"
+>
+    <div class="col-md-5">
+        <Image
+            src={screenshotImage}
+            alt="Screenshot of the app showing an example image that says 'Society' on it and it's corresponding label in a text input with three buttons below labeled 'Previous image', 'Export labels file' and 'Next image"
+            class="img-fluid"
+        />
+    </div>
+    <div class="col-md-5">
+        <h1 class="display-5 fw-bold text-body-emphasis">Labelier</h1>
+        <h2 class="lead mb-4">
+            A tool that helps you manually label a large amount of images for AI
+            training, by making the process as efficient as possible, using a
+            simple interface and hotkeys.
+        </h2>
+        <!-- <div class="alert alert-danger" role="alert" hidden id="alert">
+            <h4 class="alert-heading">Device not supported</h4>
+            <p>
+                Labelier uses some features that aren't yet supported on your
+                current browser. A solution to this issue is in the works. In
+                the meantime, you can use the tool from a computer.
+            </p>
+            <hr />
+            <p class="mb-0">
+                If you are on a computer and still see this message or if you
+                have any other issues, don't hesitate to <a
+                    href="mailto:adrian@adrianr.dev">reach out</a
+                >.
+            </p>
+        </div> -->
+        <div class="d-flex flex-sm-row flex-column gap-2">
+            <!-- <button
+                type="button"
+                class="btn btn-primary d-none"
+                id="load-saved-button"
+                ><i class="bi bi-folder2-open"></i> Reopen saved directory</button
+            > -->
+            <a href="/app" class="btn btn-primary"><i class="bi bi-cursor-text"></i>
+                Start labeling</a>
+        </div>
+    </div>
+</div>

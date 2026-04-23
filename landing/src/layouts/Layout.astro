@@ -1,0 +1,41 @@
+---
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.min.css';
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Labelier</title>
+
+		<!-- Open Graph meta tags -->
+		<meta property="og:title" content="Labelier - Effortless Local Image Labeling Tool" />
+		<meta property="og:description" content="Labelier helps you quickly label images for AI training, all in your browser and 100% private." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://labelier.adrianr.dev/" />
+		<meta property="og:image" content="https://labelier.adrianr.dev/assets/og.png" />
+		<meta property="og:image:alt" content="Screenshot of the Labelier app labeling an image" />
+		<meta property="og:site_name" content="Labelier" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Labelier - Effortless Local Image Labeling Tool" />
+		<meta name="twitter:description" content="Labelier helps you quickly label images for AI training, all in your browser and 100% private." />
+		<meta name="twitter:image" content="https://labelier.adrianr.dev/assets/og.png" />
+	</head>
+	<body class="d-flex flex-column justify-content-between vh-100">
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

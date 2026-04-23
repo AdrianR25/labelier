@@ -1,0 +1,28 @@
+<main class="text-center d-flex flex-column justify-content-center vh-100 bg-light-subtle">
+    <h1>Labelier</h1>
+    <p class="fs-3 fw-light">Load a new folder or a previously opened one to start labeling</p>
+    @if (isOldWorkspaceAvailable()) {
+    <div class="container text-start col-xl-6 col-lg-8 col-12 mt-5">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Old workspace detected!</h4>
+            <p>It looks like you were previously working on an old version of this app. You can automatically migrate
+                the data and keep working where you left off; or you can open a new folder.</p>
+            <hr>
+            <div class="hstack justify-content-end gap-3">
+                <button type="button" class="btn btn-outline-primary" (click)="loadNewDirectory()">Open new
+                    folder</button>
+                <button type="button" class="btn btn-primary" (click)="migrateAndOpenOldWorkspace()">
+                    Reopen previous workspace
+                </button>
+            </div>
+        </div>
+    </div>
+    } @else {
+    <div class="hstack justify-content-center gap-3 mt-2">
+        @if (isPreviousWorkspaceAvailable()) {
+        <button type="button" class="btn btn-primary" (click)="loadExistingDirectory()">Reopen saved folder</button>
+        }
+        <button type="button" class="btn" [ngClass]="isPreviousWorkspaceAvailable() === true ? 'btn-outline-primary' : 'btn-primary'" (click)="loadNewDirectory()">Open new folder</button>
+    </div>
+    }
+</main>
