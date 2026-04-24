@@ -1,0 +1,11 @@
+---
+const { number, title } = Astro.props;
+---
+
+<li class="hstack align-items-start gap-3">
+    <i class={`bi mt-1 fs-5 bi-${number}-circle`}></i>
+    <div class="vstack">
+        <strong>{ title }</strong>
+        <slot /> 
+    </div>
+</li>
