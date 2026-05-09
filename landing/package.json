@@ -8,6 +8,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.5",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1"
