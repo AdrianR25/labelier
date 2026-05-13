@@ -9,8 +9,11 @@ import screenshotImage from "../../assets/screenshot.jpeg";
     <div class="col-md-5">
         <Image
             src={screenshotImage}
+            layout="constrained"
             alt="Screenshot of the app showing an example image that says 'Society' on it and it's corresponding label in a text input with three buttons below labeled 'Previous image', 'Export labels file' and 'Next image"
             class="img-fluid"
+            fetchpriority={"high"}
+            loading={"eager"}
         />
     </div>
     <div class="col-md-5">
