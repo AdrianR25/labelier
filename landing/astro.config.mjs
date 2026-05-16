@@ -8,7 +8,7 @@ import purgecss from 'astro-purgecss';
 export default defineConfig({
   site: 'https://labelier.adrianr.dev',
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'en', // keep in sync with utils.ts
     locales: ['en', 'es'],
   },
   integrations: [sitemap({
