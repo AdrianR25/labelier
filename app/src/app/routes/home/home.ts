@@ -3,10 +3,11 @@ import { LabelingService } from '../../services/labeling-service';
 import { Router } from '@angular/router';
 import { CompatibilityService } from '../../services/compatibility-service';
 import { NgClass } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
-  imports: [NgClass],
+  imports: [NgClass, TranslatePipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

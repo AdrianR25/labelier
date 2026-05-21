@@ -6,11 +6,12 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ImageLabelDTO } from '../../model/image-label-dto';
 import { ExportService } from '../../services/export-service';
 import { DecimalPipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-editor',
-  imports: [RouterLink, ReactiveFormsModule, DecimalPipe],
+  imports: [RouterLink, ReactiveFormsModule, DecimalPipe, TranslatePipe],
   templateUrl: './editor.html',
   styleUrl: './editor.css',
   host: {
