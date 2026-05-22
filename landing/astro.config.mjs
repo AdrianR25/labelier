@@ -12,6 +12,7 @@ export default defineConfig({
     locales: ['en', 'es'],
   },
   integrations: [sitemap({
+    filter: (page) => page !== 'https://labelier.adrianr.dev/',
     i18n: {
       defaultLocale: 'en',
       locales: {
