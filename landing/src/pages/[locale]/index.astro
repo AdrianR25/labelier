@@ -1,0 +1,24 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import HeroSection from "../../components/sections/HeroSection.astro";
+import FeaturesSection from "../../components/sections/features/FeaturesSection.astro";
+import InstructionsSection from "../../components/sections/instructions/InstructionsSection.astro";
+import FooterSection from "../../components/sections/FooterSection.astro";
+import { i18n } from "astro:config/client";
+
+export function getStaticPaths() {
+	return i18n!.locales.map((locale) => ({
+		params: { locale },
+	}));
+}
+---
+
+<Layout>
+	<main id="landing">
+		<HeroSection />
+		<FeaturesSection />
+		<InstructionsSection />
+	</main>
+	<FooterSection />
+</Layout>

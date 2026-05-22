@@ -1,6 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import screenshotImage from "../../assets/screenshot.jpeg";
+
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <div
@@ -19,9 +24,7 @@ import screenshotImage from "../../assets/screenshot.jpeg";
     <div class="col-md-5">
         <h1 class="display-5 fw-bold text-body-emphasis">Labelier</h1>
         <h2 class="lead mb-4">
-            A tool that helps you manually label a large amount of images for AI
-            training, by making the process as efficient as possible, using a
-            simple interface and hotkeys.
+            {t('hero.description')}
         </h2>
         <!-- <div class="alert alert-danger" role="alert" hidden id="alert">
             <h4 class="alert-heading">Device not supported</h4>
@@ -46,7 +49,7 @@ import screenshotImage from "../../assets/screenshot.jpeg";
                 ><i class="bi bi-folder2-open"></i> Reopen saved directory</button
             > -->
             <a href="/app" class="btn btn-primary"><i class="bi bi-cursor-text"></i>
-                Start labeling</a>
+                {t('hero.cta')}</a>
         </div>
     </div>
 </div>
