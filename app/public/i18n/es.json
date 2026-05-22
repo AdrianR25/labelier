@@ -1,0 +1,34 @@
+{
+    "home": {
+        "description": "Carga una nueva carpeta o una ya abierta para empezar a etiquetar",
+        "oldWorkspace": {
+            "title": "¡Espacio de trabajo antiguo detectado!",
+            "description": "Parece que has estado trabajando en una versión antigua de esta aplicación. Puedes migrar automáticamente los datos y continuar trabajando donde lo dejaste; o puedes abrir una nueva carpeta.",
+            "migrateButton": "Reabrir espacio de trabajo anterior"
+        },
+        "reopenSavedButton": "Reabrir carpeta guardada",
+        "openNewButton": "Abrir nueva carpeta"
+    },
+    "editor": {
+        "back": "Volver",
+        "previousButton": "Imagen anterior",
+        "exportButton": "Exportar archivo de etiquetas",
+        "nextButton": "Imagen siguiente",
+        "hotkeys": {
+            "title": "Atajos de teclado",
+            "enter": {
+                "key": "Enter",
+                "description": "Guarda la etiqueta y pasa a la imagen siguiente."
+            },
+            "right": {
+                "key": "Flecha derecha",
+                "description": "Salta a la imagen siguiente sin guardar la etiqueta actual."
+            },
+            "left": {
+                "key": "Flecha izquierda",
+                "description": "Vuelve a la imagen anterior sin guardar la etiqueta actual."
+            },
+            "alt": "Alt"
+        }
+    }
+}
