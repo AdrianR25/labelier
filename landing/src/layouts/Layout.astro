@@ -1,6 +1,10 @@
 ---
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <!doctype html>
 <html lang="en">
@@ -12,20 +16,20 @@ import 'bootstrap-icons/font/bootstrap-icons.min.css';
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta name="description" content="Free, private, and efficient image labeling tool for data annotation and machine learning projects.">
-		<title>Labelier</title>
+		<meta name="description" content={t('layout.description')}>
+		<title>{t('layout.title')}</title>
 
 		<!-- Open Graph meta tags -->
-		<meta property="og:title" content="Labelier - Effortless Local Image Labeling Tool" />
-		<meta property="og:description" content="Labelier helps you quickly label images for AI training, all in your browser and 100% private." />
+		<meta property="og:title" content={t('layout.title')} />
+		<meta property="og:description" content={t('layout.description')} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://labelier.adrianr.dev/" />
 		<meta property="og:image" content="https://labelier.adrianr.dev/og.png" />
 		<meta property="og:image:alt" content="Screenshot of the Labelier app labeling an image" />
 		<meta property="og:site_name" content="Labelier" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content="Labelier - Effortless Local Image Labeling Tool" />
-		<meta name="twitter:description" content="Labelier helps you quickly label images for AI training, all in your browser and 100% private." />
+		<meta name="twitter:title" content={t('layout.title')} />
+		<meta name="twitter:description" content={t('layout.description')} />
 		<meta name="twitter:image" content="https://labelier.adrianr.dev/og.png" />
 	</head>
 	<body class="d-flex flex-column justify-content-between vh-100">
