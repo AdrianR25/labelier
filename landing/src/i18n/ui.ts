@@ -2,7 +2,8 @@ export const ui = {
   en: {
     'layout.title': 'Labelier: Label Images for AI Training | Free & Local Browser Tool',
     'layout.description': 'Labelier is a free, browser-based tool to manually label large sets of images for AI training. Fast, private, and works entirely offline. No signup required. Try it now.',
-    'hero.description': 'A tool that helps you manually label a large amount of images for AI training, by making the process as efficient as possible, using a simple interface and hotkeys.',
+    'hero.title': 'Labelier - Free image labeling tool for AI training',
+    'hero.description': 'Label images fast, right in your browser. No signup required.',
     'hero.cta': 'Start labeling',
     'features.title': 'Features',
     'features.free.title': 'Free to use',
@@ -30,7 +31,8 @@ export const ui = {
   es: {
     'layout.title': 'Labelier: Etiqueta Imágenes para Entrenamiento de IA | Gratis y Local',
     'layout.description': 'Labelier es una herramienta gratuita para etiquetar grandes colecciones de imágenes para entrenamiento de IA. Rápida, privada y funciona 100% en el navegador. Sin registro. Prúebala ahora.',
-    'hero.description': 'Una herramienta que te ayuda a etiquetar manualmente grandes cantidades de imágenes para el entrenamiento de IA, haciendo el proceso lo más eficiente posible mediante el uso de una interfaz sencilla y atajos de teclado.',
+    'hero.title': 'Labelier - Herramienta gratuita de etiquetado de imágenes para entrenamiento de IA',
+    'hero.description': 'Etiqueta imágenes rápidamente, directamente en el navegador. Sin registro.',
     'hero.cta': 'Empieza a etiquetar',
     'features.title': 'Características',
     'features.free.title': 'Gratis',
