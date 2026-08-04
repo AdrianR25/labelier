@@ -1,5 +1,7 @@
 import { ui } from './ui';
 
+type TranslationValue = string | Record<string, unknown>[] | object;
+
 const defaultLang = 'en';
 
 export function getLangFromUrl(url: URL) {
@@ -8,8 +10,12 @@ export function getLangFromUrl(url: URL) {
   return defaultLang;
 }
 
+
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
-  }
+  return function t<T extends TranslationValue>(key: keyof typeof ui[typeof defaultLang]): T {
+    const langValue = ui[lang][key];
+    const fallback = ui[defaultLang][key];
+    
+    return (langValue ?? fallback) as T;
+  };
 }

@@ -1,0 +1,21 @@
+---
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import FaqItem from './FaqItem.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const faqs = t('faqs') as unknown as Array<{question: string; answer: string}>;
+---
+
+<div class="container mt-5 bg-subtle-secondary">
+    <h2 class="border-bottom pb-1">{t('faq.title')}</h2>
+    <div class="accordion">
+        {
+            faqs.map((faq, index) => (
+                <FaqItem index={ index } question={ faq.question }>
+                    <p>{ faq.answer }</p>
+                </FaqItem>
+            ))
+        }
+    </div>    
+</div>
